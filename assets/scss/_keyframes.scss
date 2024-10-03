@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+@keyframes shrink-bounce{
+    0% {
+        transform: scale(1);
+    }
+    33% {    
+        transform: scale(.85);
+    }
+    100% {
+        transform: scale(1);    
+    }
+}
+
+@keyframes checkbox-check{
+    0% {
+        width: 0;
+        height: 0;
+        border-color: #212121;
+        transform: translate3d(0,0,0) rotate(45deg);
+    }
+
+    33% {
+        width: 6px;
+        height: 0;
+        transform: translate3d(0,0,0) rotate(45deg);
+    }
+
+    100% {    
+        width: 6px;
+        height: 10px;    
+        border-color: #212121;
+        transform: translate3d(0,-10px,0) rotate(45deg);
+    }
+}

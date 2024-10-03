@@ -1,0 +1,23 @@
+{
+  "name": "keek",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+  },
+  "scripts": {
+    "build": "sass --stop-on-error --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css&&webpack --mode development --config webpack.config.js",
+    "sass": "sass --stop-on-error --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
+    "webpack": "webpack --mode production --config webpack.config.js"
+  },
+  "author": "Nat Okpe",
+  "license": "ISC",
+  "devDependencies": {
+    "@flaticon/flaticon-uicons": "^3.3.1",
+    "bootstrap": "^5.3.3",
+    "copy-webpack-plugin": "^12.0.2",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.7.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
