@@ -36,19 +36,17 @@ get_header();
 
                             <h3>Verify Your Email</h3>
                             <div class="w-100 mt-4 text-start">
-                                <p>We're excited to have you join us! To verify your email address and complete your sign up, please check your email inbox for a verification message from us and click the link in the email.</p>
+                                <p>We're excited to have you join us! We have sent a verification link to your email address. Click the link in the email to complete your sign up.</p>
 
-                                <p>If you don't see the email in your inbox, be sure to also check your spam or junk folder, just in case.</p>
-
-                                <p><a href="#" tabindex="1" disabled>Resend email</a></p>
+                                <p><a href="#" tabindex="1" disabled><!-- <i class="fi fi-rr-rotate-right"></i>  -->Resend email</a></p>
 
                                 <p class="mt-5">Having troubles? <a href="<?= get_page_link(Theme::page('contact')) ?>" tabindex="1">Get help</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 mt-5"></div>
             </div>
+
             <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-flex align-items-stretch">
                 <div class="media-column-img w-100 flex-grow-1 d-flex align-items-stretch" style="background-image: url('<?= Theme::url('assets/img/media-col.jpg') ?>');">
                     <div class="opacity-25 w-100 flex-grow-1"></div>

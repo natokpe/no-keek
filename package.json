@@ -7,6 +7,7 @@
   "scripts": {
     "build": "sass --stop-on-error --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css&&webpack --mode development --config webpack.config.js",
     "sass": "sass --stop-on-error --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
+    "sass-watch": "sass --stop-on-error --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
     "webpack": "webpack --mode production --config webpack.config.js"
   },
   "author": "Nat Okpe",

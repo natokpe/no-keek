@@ -10,6 +10,7 @@ add_filter('pre_get_document_title', function ($title) {
 }, 10, 3);
 
 $signon        = null;
+$redir         = null;
 $nonce_id      = 'user_signup_form';
 $do_signup     = null;
 $screen_errors = [];
@@ -62,26 +63,47 @@ if ((! is_user_logged_in()) && Request::is_post()) {
     }
 
     if (is_int($signon)) {
-        wp_redirect(
-            add_query_arg(
-                [
-                    'action' => Theme::base64_url_encode(
-                        implode('|', [
-                            'verify_email',
-                            wp_create_nonce('signup_verify_email_' . $signon),
-                            $signon,
-                        ])
-                    ),
-                ],
-                get_page_link(Theme::page('register'))
-            )
+        $redir = add_query_arg(
+            [
+                'action' => Theme::base64_url_encode(
+                    implode('|', [
+                        'verify_email',
+                        wp_create_nonce('signup_verify_email_' . $signon),
+                        $signon,
+                    ])
+                ),
+            ],
+            get_page_link(Theme::page('register'))
         );
-
-        exit;
     } else {
         $do_signup++;
         $screen_errors['general'] = 'An error occurred. Please try again later.';
     }
+}
+
+if (is_user_logged_in()) {
+    $redir = home_url();
+
+    if (in_array('student', $user->roles)) {
+        $redir = get_page_link(Theme::page('dashboard-student'));
+    }
+
+    if (in_array('teacher', $user->roles)) {
+        $redir = get_page_link(Theme::page('dashboard-teacher'));
+    }
+
+    if (count(array_intersect($user->roles, [
+        'administrator',
+        'hrm',
+        'accountant',
+    ])) > 0) {
+        $redir = get_admin_url();
+    }
+}
+
+if (isset($redir)) {
+    wp_redirect($redir);
+    exit;
 }
 
 get_header();
