@@ -1,7 +1,5 @@
 /node_modules/
 /vendor/
-/style.*
-/script.*
 
 # Configuration
 /.env
