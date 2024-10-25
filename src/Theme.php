@@ -205,32 +205,6 @@ class Theme
      * 
      */
     public static
-    function decodeResetToken(string $token): array|bool
-    {
-        $res = self::base64_url_decode($token);
-
-        if ($res === false) {
-            return false;
-        }
-
-        $res = explode('||', $res);
-
-        if (count($res) !== 2) {
-            return false;
-        }
-
-        $res = [
-            'user' => $res[0],
-            'key'  => $res[1],
-        ];
-
-        return ctype_digit($res['user']) ? $res : false;
-    }
-
-    /**
-     * 
-     */
-    public static
     function getResetUrl(string $token): string
     {
         return add_query_arg(
@@ -238,7 +212,7 @@ class Theme
                 'action' => 'reset-password',
                 (new Config([]))->password_reset_url_token_key => urlencode($token),
             ],
-            get_page_link(self::page('login'))
+            get_page_link(self::page('account'))
         );
     }
 
@@ -251,6 +225,42 @@ class Theme
         $pg = (get_option('page_loc') ?? [])[$name] ?? null;
 
         return is_string($pg) && ctype_digit($pg) ? (int) $pg : null;
+    }
+
+    /**
+     * 
+     */
+    public static
+    function startPage(string|array $role): string
+    {
+        $startpage = null;
+
+        if (in_array('teacher', (array) $role)) {
+            $startpage = Theme::page('startpage-teacher');
+        }
+
+        if (in_array('student', (array) $role)) {
+            $startpage = Theme::page('startpage-student');
+        }
+
+        if (is_int($startpage)) {
+            // TODO: check if page exists
+            //  && (get_post($startpage) instanceOf WP_)
+
+            return get_page_link($startpage);
+        }
+
+        if (count(array_intersect((array) $role, [
+            'administrator',
+            'senior_administrator',
+            'junior_administrator',
+            'hrm',
+            'accountant',
+        ])) > 0) {
+            return get_admin_url();
+        }
+
+        return home_url();
     }
 
     public static

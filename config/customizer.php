@@ -195,12 +195,21 @@ $customizer = [
                 ],
             ],
 
+            'no_pg_ac' => [
+                'type'     => 'dropdown-pages',
+                'label'    => __('Account', 'natokpe'),
+                'settings' => [
+                    'setting'    => 'page_loc[account]',
+                    'capability' => 'edit_theme_options',
+                    'type'       => 'option',
+                ],
+            ],
 
             'no_pg_password-recover' => [
                 'type'     => 'dropdown-pages',
-                'label'    => __('Recover Password', 'natokpe'),
+                'label'    => __('Forgot Password', 'natokpe'),
                 'settings' => [
-                    'setting'    => 'page_loc[password-recover]',
+                    'setting'    => 'page_loc[forgot-password]',
                     'capability' => 'edit_theme_options',
                     'type'       => 'option',
                 ],
@@ -210,17 +219,47 @@ $customizer = [
                 'type'     => 'dropdown-pages',
                 'label'    => __('Reset Password', 'natokpe'),
                 'settings' => [
-                    'setting'    => 'page_loc[password-reset]',
+                    'setting'    => 'page_loc[reset-password]',
                     'capability' => 'edit_theme_options',
                     'type'       => 'option',
                 ],
             ],
 
-            'no_pg_dashboard' => [
+            'no_pg_startpage_student' => [
                 'type'     => 'dropdown-pages',
-                'label'    => __('Dashboard', 'natokpe'),
+                'label'    => __('Startpage (Student)', 'natokpe'),
                 'settings' => [
-                    'setting'    => 'page_loc[dashboard]',
+                    'setting'    => 'page_loc[startpage-student]',
+                    'capability' => 'edit_theme_options',
+                    'type'       => 'option',
+                ],
+            ],
+
+            'no_pg_startpage_teacher' => [
+                'type'     => 'dropdown-pages',
+                'label'    => __('Startpage (Teacher)', 'natokpe'),
+                'settings' => [
+                    'setting'    => 'page_loc[startpage-teacher]',
+                    'capability' => 'edit_theme_options',
+                    'type'       => 'option',
+                ],
+            ],
+
+            'no_pg_startpage_accountant' => [
+                'type'     => 'dropdown-pages',
+                'label'    => __('Startpage (Accountant)', 'natokpe'),
+                'settings' => [
+                    'setting'    => 'page_loc[startpage-accountant]',
+                    'capability' => 'edit_theme_options',
+                    'type'       => 'option',
+                ],
+            ],
+
+            'no_pg_startpage_hrm' => [
+                'type'     => 'dropdown-pages',
+                'label'    => __('Startpage (HRM)', 'natokpe'),
+                'settings' => [
+                    'setting'    => 'page_loc[startpage-hrm]',
                     'capability' => 'edit_theme_options',
                     'type'       => 'option',
                 ],
@@ -236,21 +275,11 @@ $customizer = [
                 ],
             ],
 
-            'no_pg_notif' => [
+            'no_pg_student_courses' => [
                 'type'     => 'dropdown-pages',
-                'label'    => __('Notifications', 'natokpe'),
+                'label'    => __('Student Courses', 'natokpe'),
                 'settings' => [
-                    'setting'    => 'page_loc[notifications]',
-                    'capability' => 'edit_theme_options',
-                    'type'       => 'option',
-                ],
-            ],
-
-            'no_pg_chat' => [
-                'type'     => 'dropdown-pages',
-                'label'    => __('Chat', 'natokpe'),
-                'settings' => [
-                    'setting'    => 'page_loc[chat]',
+                    'setting'    => 'page_loc[student-courses]',
                     'capability' => 'edit_theme_options',
                     'type'       => 'option',
                 ],
@@ -276,25 +305,25 @@ $customizer = [
                 ],
             ],
 
-            'no_pg_list-classes' => [
-                'type'     => 'dropdown-pages',
-                'label'    => __('List Classes', 'natokpe'),
-                'settings' => [
-                    'setting'    => 'page_loc[list-classes]',
-                    'capability' => 'edit_theme_options',
-                    'type'       => 'option',
-                ],
-            ],
+            // 'no_pg_list-classes' => [
+            //     'type'     => 'dropdown-pages',
+            //     'label'    => __('List Classes', 'natokpe'),
+            //     'settings' => [
+            //         'setting'    => 'page_loc[list-classes]',
+            //         'capability' => 'edit_theme_options',
+            //         'type'       => 'option',
+            //     ],
+            // ],
 
-            'no_pg_payment' => [
-                'type'     => 'dropdown-pages',
-                'label'    => __('Payment', 'natokpe'),
-                'settings' => [
-                    'setting'    => 'page_loc[payment]',
-                    'capability' => 'edit_theme_options',
-                    'type'       => 'option',
-                ],
-            ],
+            // 'no_pg_payment' => [
+            //     'type'     => 'dropdown-pages',
+            //     'label'    => __('Payment', 'natokpe'),
+            //     'settings' => [
+            //         'setting'    => 'page_loc[payment]',
+            //         'capability' => 'edit_theme_options',
+            //         'type'       => 'option',
+            //     ],
+            // ],
 
             'no_pg_contact' => [
                 'type'     => 'dropdown-pages',
@@ -341,16 +370,6 @@ $customizer = [
                 'label'    => __('Frequently Asked Questions (FAQ)', 'natokpe'),
                 'settings' => [
                     'setting'    => 'page_loc[faq]',
-                    'capability' => 'edit_theme_options',
-                    'type'       => 'option',
-                ],
-            ],
-
-            'no_pg_logout' => [
-                'type'     => 'dropdown-pages',
-                'label'    => __('Log out', 'natokpe'),
-                'settings' => [
-                    'setting'    => 'page_loc[logout]',
                     'capability' => 'edit_theme_options',
                     'type'       => 'option',
                 ],

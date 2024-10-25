@@ -1,8 +1,18 @@
 <?php
+/**
+ * Template Name: Forgot Password
+ */
+
 declare(strict_types = 1);
 
 use NatOkpe\Wp\Theme\Keek\Theme;
 use NatOkpe\Wp\Theme\Keek\Utils\Request;
+
+if (is_user_logged_in()) {
+    // TODO: prevent loop back
+    wp_redirect(get_page_link(Theme::page('account')));
+    exit;
+}
 
 add_filter('pre_get_document_title', function ($title) {
     return 'Forgot Password';
@@ -19,32 +29,20 @@ $form          = [
 
 if ((! is_user_logged_in()) && Request::is_post()) {
     if (wp_verify_nonce($form['nonce'], $nonce_id)) {
-        // retrieve_password(wp_get_current_user()->user_login)
+        // $user = get_user_by_email($form['nonce']);
 
-        // if (is_wp_error($user)) {
-        //     $screen_errors[] = $user->get_error_message();
-        // }
+        if ($user instanceOf WP_User) {
+            // retrieve_password(wp_get_current_user()->user_login)
+
+            // if (is_wp_error($user)) {
+            //     $screen_errors[] = $user->get_error_message();
+            // }
+        }
     }
 }
 
 if (is_user_logged_in()) {
-    $redir = home_url();
-
-    if (in_array('student', $user->roles)) {
-        $redir = get_page_link(Theme::page('dashboard-student'));
-    }
-
-    if (in_array('teacher', $user->roles)) {
-        $redir = get_page_link(Theme::page('dashboard-teacher'));
-    }
-
-    if (count(array_intersect($user->roles, [
-        'administrator',
-        'hrm',
-        'accountant',
-    ])) > 0) {
-        $redir = get_admin_url();
-    }
+    $redir = get_page_link(Theme::page('account'));
 }
 
 if (isset($redir)) {
@@ -79,10 +77,10 @@ get_header();
 
                             <p class="mt-0 mb-4 p-0">Enter the email you used to create your account so we can send you instructions on how to reset your password.</p>
 
-                            <form class="w-100" method="POST" action="<?= get_page_link(Theme::page('login')) ?>">
+                            <form class="w-100" method="POST" action="<?= get_page_link(Theme::page('recover-password')) ?>">
                                 <div class="mb-4">
-                                    <label class="form-label" for="form-login-email">Email</label>
-                                    <input id="form-login-email"
+                                    <label class="form-label" for="form-user-email">Email</label>
+                                    <input id="form-user-email"
                                         class="form-control"
                                         type="email"
                                         name="email"

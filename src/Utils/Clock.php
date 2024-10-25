@@ -23,7 +23,7 @@ class Clock
     }
 
     /**
-     * 
+     * MySQL DATETIME format Y-m-d H:i:s
      */
     public static
     function nowYear(string $tz = 'UTC'): string

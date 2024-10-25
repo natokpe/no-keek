@@ -15,9 +15,16 @@ add_filter('pre_get_document_title', function ($title) {
 $signon        = null;
 $redir         = null;
 $nonce_id      = 'user_signup_form';
-$do_signup     = null;
-$screen_errors = [];
-$form          = [
+$do_signup     = true;
+$screen_errors = array_fill_keys([
+    'server',
+    'email',
+    'password',
+    'vpassword',
+    'terms',
+], false);
+
+$form = [
     'email'     => Request::post('email', ''),
     'password'  => Request::post('password', ''),
     'vpassword' => Request::post('vpassword', ''),
@@ -26,35 +33,28 @@ $form          = [
 ];
 
 if ((! is_user_logged_in()) && Request::is_post()) {
-    $do_signup = 0;
+    $screen_errors['server'] = ! wp_verify_nonce(
+        $form['nonce'], $nonce_id
+    ); // An error occurred. Please refresh the page and try again.
 
-    if (! wp_verify_nonce($form['nonce'], $nonce_id)) {
-        $do_signup++;
-        $screen_errors['general'] = 'An error occurred. Please refresh the page and try again.';
+    $screen_errors['email'] = (! filter_var(
+        $form['email'],
+        FILTER_VALIDATE_EMAIL
+    )) || (email_exists($form['email']) !== false);
+
+    $screen_errors['password'] = empty($form['password'])
+    || (mb_strlen($form['password']) < 6)
+    || (mb_strlen($form['password']) > 50);
+
+    $screen_errors['vpassword'] = $form['vpassword'] !== $form['password'];
+
+    $form['terms'] !== true;
+
+    foreach ($screen_errors as $_) {
+        $do_signup = $do_signup && (! $_);
     }
 
-    // if (getmxrr($form['email'])) {}
-    if (! filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
-        $do_signup++;
-        $screen_errors['email'] = 'Enter a valid email.';
-    }
-
-    if (empty($form['password'])) {
-        $do_signup++;
-        $screen_errors['password'] = 'Choose a password.';
-    }
-
-    if ($form['vpassword'] !== $form['password']) {
-        $do_signup++;
-        $screen_errors['vpassword'] = 'Passwords do not match.';
-    }
-
-    if ($form['terms'] !== true) {
-        $do_signup++;
-        $screen_errors['terms'] = 'You must accept the terms.';
-    }
-
-    if ($do_signup === 0) {
+    if ($do_signup) {
         $signon = wp_insert_user([
             'user_pass'            => $form['password'],
             'user_login'           => $form['email'],
@@ -65,42 +65,19 @@ if ((! is_user_logged_in()) && Request::is_post()) {
     }
 
     if (is_int($signon)) {
-        $redir = add_query_arg(
-            [
-                'action' => Theme::base64_url_encode(
-                    implode('|', [
-                        'verify_email',
-                        wp_create_nonce('signup_verify_email_' . $signon),
-                        $signon,
-                    ])
-                ),
-            ],
-            get_page_link(Theme::page('register'))
-        );
+        $usr = new WP_User($signon);
+
+        wp_set_auth_cookie($usr->ID, false, is_ssl());
+        wp_set_current_user($usr->ID, $usr->user_login);
+
+        $redir = get_page_link(Theme::page('account'));
     } else {
-        $do_signup++;
-        $screen_errors['general'] = 'An error occurred. Please try again later.';
+        $screen_errors['server'] = true;
     }
 }
 
 if (is_user_logged_in()) {
-    $redir = home_url();
-
-    if (in_array('student', $user->roles)) {
-        $redir = get_page_link(Theme::page('dashboard-student'));
-    }
-
-    if (in_array('teacher', $user->roles)) {
-        $redir = get_page_link(Theme::page('dashboard-teacher'));
-    }
-
-    if (count(array_intersect($user->roles, [
-        'administrator',
-        'hrm',
-        'accountant',
-    ])) > 0) {
-        $redir = get_admin_url();
-    }
+    $redir = get_page_link(Theme::page('account'));
 }
 
 if (isset($redir)) {
@@ -156,7 +133,7 @@ get_header();
                                         type="password"
                                         name="password"
                                         required="required"
-                                        minlength="8"
+                                        minlength="6"
                                         maxlength="50"
                                         tabindex="1"
                                         placeholder=""
@@ -171,7 +148,7 @@ get_header();
                                         type="password"
                                         name="vpassword"
                                         required="required"
-                                        minlength="8"
+                                        minlength="6"
                                         maxlength="50"
                                         tabindex="1"
                                         value="<?= $form['vpassword'] ?>" 
