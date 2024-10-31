@@ -23,6 +23,21 @@ $menu = wp_nav_menu([
     'item_spacing'         => 'preserve',
 ]);
 
+$homeUrl = home_url();
+
+if (! $menu) {
+$menu = <<<END
+<nav class="navbar-nav">
+    <ul class="navbar-nav-menu">
+        <li class="menu-item current-menu-item"><a href="{$homeUrl}">Home</a></li>
+        <li class="menu-item"><a href="{$homeUrl}/courses/">Courses</a></li>
+        <li class="menu-item"><a href="{$homeUrl}/about-us/">About Us</a></li>
+        <li class="menu-item"><a href="{$homeUrl}/contact-us/">Contact Us</a></li>
+    </ul>
+</nav>
+END;
+}
+
 ?>
 
 <div class="navbar">
@@ -45,20 +60,33 @@ $menu = wp_nav_menu([
                                     <div class="col-12">
 
                                         <div class="navbar-action-content">
-                                            <nav class="navbar-nav">
-                                                <ul class="navbar-nav-menu">
-                                                    <li class="menu-item current-menu-item"><a href="#">Home</a></li>
-                                                    <li class="menu-item"><a href="#">Explore Courses</a></li>
-                                                    <li class="menu-item"><a href="#">About Us</a></li>
-                                                    <li class="menu-item"><a href="#">Contact Us</a></li>
-                                                </ul>
-                                            </nav>
-
-                                            <?php // echo $menu; ?>
+                                            <?php echo $menu; ?>
 
                                             <div class="navbar-action-main">
+
+                                            <?php
+
+                                            if (is_user_logged_in()) {
+
+                                            ?>
+
+                                                <a class="btn btn-black btn-outline btn-medium" href="<?php echo get_page_link(Theme::page('account')); ?>">My Account</a>
+
+                                            <?php
+
+                                            } else {
+
+                                            ?>
+
                                                 <a class="btn btn-black btn-outline btn-medium" href="<?= get_page_link(Theme::page('login')) ?>">Login</a>
                                                 <a class="btn btn-primary btn-medium" href="<?= get_page_link(Theme::page('register')) ?>">Get Started</a>
+
+                                            <?php
+
+                                            }
+
+                                            ?>
+
                                             </div>
                                         </div>
                                     </div>

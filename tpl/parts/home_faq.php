@@ -4,8 +4,9 @@ declare(strict_types = 1);
 use NatOkpe\Wp\Theme\Keek\Theme;
 
 ?>
+
 <!-- FAQ -->
-<div class="container page-section faq my-5 py-4">
+<div class="container page-section faq">
     <div class="row">
         <div class="col-12 text-center">
             <h2 class="section-heading">FAQ</h2>

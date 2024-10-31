@@ -305,25 +305,15 @@ $customizer = [
                 ],
             ],
 
-            // 'no_pg_list-classes' => [
-            //     'type'     => 'dropdown-pages',
-            //     'label'    => __('List Classes', 'natokpe'),
-            //     'settings' => [
-            //         'setting'    => 'page_loc[list-classes]',
-            //         'capability' => 'edit_theme_options',
-            //         'type'       => 'option',
-            //     ],
-            // ],
-
-            // 'no_pg_payment' => [
-            //     'type'     => 'dropdown-pages',
-            //     'label'    => __('Payment', 'natokpe'),
-            //     'settings' => [
-            //         'setting'    => 'page_loc[payment]',
-            //         'capability' => 'edit_theme_options',
-            //         'type'       => 'option',
-            //     ],
-            // ],
+            'no_pg_dashboard' => [
+                'type'     => 'dropdown-pages',
+                'label'    => __('Dashboard', 'natokpe'),
+                'settings' => [
+                    'setting'    => 'page_loc[dashboard]',
+                    'capability' => 'edit_theme_options',
+                    'type'       => 'option',
+                ],
+            ],
 
             'no_pg_contact' => [
                 'type'     => 'dropdown-pages',

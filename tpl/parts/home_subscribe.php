@@ -6,7 +6,7 @@ use NatOkpe\Wp\Theme\Keek\Theme;
 
 ?>
 
-<div class="container page-section subscribe my-5 py-4">
+<div class="container page-section subscribe">
     <div class="row align-items-center">
         <div class="col-12 col-md-6">
             <h2 class="section-heading">Stay in the Loop! Subscribe to our Newsletter</h2>

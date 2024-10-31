@@ -61,7 +61,7 @@ get_header();
             </div>
             <div class="profile-card-summary">
                 <div class="profile-card-name"><?php echo get_user_meta($user->ID, 'tmp_full_name', true); ?></div>
-                <div class="profile-card-role">Student</div>
+                <div class="profile-card-role">Teacher</div>
             </div>
         </a>
 
@@ -71,37 +71,37 @@ get_header();
         <ul class="navbar-drawer-nav-menu">
 
             <li class="menu-item current-menu-item">
+                <a class="menu-link" href="<?= get_page_link(Theme::page('dashboard')) ?>">
+                    <span class="menu-item-icon"><i class="fi fi-rr-dashboard"></i></span>
+                    <span class="menu-item-label">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="<?= get_page_link(Theme::page('teacher-attendance')) ?>">
+                    <span class="menu-item-icon"><i class="fi fi-rr-calendar-day"></i></span>
+                    <span class="menu-item-label">Attendance</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="<?= get_page_link(Theme::page('teacher-assessments')) ?>">
+                    <span class="menu-item-icon"><i class="fi fi-rr-test"></i></span>
+                    <span class="menu-item-label">Manage Assessments</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="<?= get_page_link(Theme::page('teacher-reports')) ?>">
+                    <span class="menu-item-icon"><i class="fi fi-rr-chart-pie-alt"></i></span>
+                    <span class="menu-item-label">Reports</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
                 <a class="menu-link" href="<?= get_page_link(Theme::page('profile')) ?>">
                     <span class="menu-item-icon"><i class="fi fi-rr-user"></i></span>
                     <span class="menu-item-label">My Profile</span>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="<?= get_page_link(Theme::page('list-courses')) ?>">
-                    <span class="menu-item-icon"><i class="fi fi-rr-apps"></i></span>
-                    <span class="menu-item-label">Explore Courses</span>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="<?= get_page_link(Theme::page('student-courses')) ?>">
-                    <span class="menu-item-icon"><i class="fi fi-rr-book-alt"></i></span>
-                    <span class="menu-item-label">My Courses</span>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="<?= get_page_link(Theme::page('student-assessments')) ?>">
-                    <span class="menu-item-icon"><i class="fi fi-rr-test"></i></span>
-                    <span class="menu-item-label">Assessments</span>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="<?= get_page_link(Theme::page('student-reports')) ?>">
-                    <span class="menu-item-icon"><i class="fi fi-rr-chart-pie-alt"></i></span>
-                    <span class="menu-item-label">Reports</span>
                 </a>
             </li>
 

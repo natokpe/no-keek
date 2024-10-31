@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Profile
+ * Template Name: Dashboard
  */
  
 declare(strict_types = 1);
@@ -16,19 +16,19 @@ $user = wp_get_current_user();
 $tpl = null;
 
 if (in_array('hrm', $user->roles)) {
-    $tpl = 'tpl/profile_hrm';
+    $tpl = 'tpl/dashboard_hrm';
 }
 
 if (in_array('accountant', $user->roles)) {
-    $tpl = 'tpl/profile_accountant';
+    $tpl = 'tpl/dashboard_accountant';
 }
 
 if (in_array('teacher', $user->roles)) {
-    $tpl = 'tpl/profile_teacher';
+    $tpl = 'tpl/dashboard_teacher';
 }
 
 if (in_array('student', $user->roles)) {
-    $tpl = 'tpl/profile_student';
+    $tpl = 'tpl/dashboard_student';
 }
 
 if (! isset($tpl)) {

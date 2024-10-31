@@ -14,7 +14,7 @@ add_filter('pre_get_document_title', function ($title) {
 
 Theme::add_body_classes(
     'navbar-float',
-    'navbar-student',
+    'navbar-teacher',
     'sidebar-float',
     'bg-grey'
 );
@@ -27,7 +27,7 @@ get_header();
 
 <div class="frame">
     <div class="frame-header">
-        <?php get_template_part('tpl/parts/nav-student'); ?>
+        <?php get_template_part('tpl/parts/nav-teacher'); ?>
     </div>
 
     <div class="frame-body">
@@ -52,7 +52,7 @@ get_header();
                                 <?php echo get_user_meta($user->ID, 'tmp_full_name', true); ?>
                             </div>
                             <div class="user-profile-role text-center">
-                                Student
+                                Teacher
                             </div>
                         </div>
                         <div class="card-footer"></div>
